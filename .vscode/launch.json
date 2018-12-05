@@ -4,7 +4,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch day1/part1",
+			"name": "Launch day1/solution_part1",
 			"program": "${workspaceRoot}/day1/solution_part1.js",
 			"cwd": "${workspaceRoot}/day1",
 			"protocol": "inspector"
@@ -12,7 +12,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch day1/part2",
+			"name": "Launch day1/solution_part2",
 			"program": "${workspaceRoot}/day1/solution_part2.js",
 			"cwd": "${workspaceRoot}/day1",
 			"protocol": "inspector"
@@ -20,7 +20,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch day2/part1",
+			"name": "Launch day2/solution_part1",
 			"program": "${workspaceRoot}/day2/solution_part1.js",
 			"cwd": "${workspaceRoot}/day2",
 			"protocol": "inspector"
@@ -28,7 +28,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch day2/part2",
+			"name": "Launch day2/solution_part2",
 			"program": "${workspaceRoot}/day2/solution_part2.js",
 			"cwd": "${workspaceRoot}/day2",
 			"protocol": "inspector"
