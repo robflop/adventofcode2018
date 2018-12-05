@@ -1,19 +1,13 @@
-const unixLogTime = obj => new Date(`${obj.year}-${obj.month}-${obj.day} ${obj.hour}:${obj.minute}`).getTime();
-
 const input = require('fs').readFileSync('./input.txt', 'utf8').split('\r\n').map(log => {
-	const logRegex = new RegExp(/\[(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2})\]\s(falls asleep|Guard (#\d{1,4}) begins shift|wakes up)/);
+	const logRegex = new RegExp(/\[(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2})\]\s(falls asleep|Guard (#\d{1,4}) begins shift|wakes up)/);
 	const logInfo = logRegex.exec(log);
 
 	return {
-		year: logInfo[1],
-		month: logInfo[2],
-		day: logInfo[3],
-		hour: logInfo[4],
-		minute: logInfo[5],
-		action: logInfo[6][0].toLocaleLowerCase(), // lowercase first letter only to identify
-		guard: logInfo[7]
+		timestamp: new Date(logInfo[1]).getTime(),
+		action: logInfo[2][0].toLocaleLowerCase(), // lowercase first letter only to identify
+		guard: logInfo[3]
 	};
-}).sort((a, b) => unixLogTime(a) - unixLogTime(b));
+}).sort((a, b) => a.timestamp - b.timestamp);
 
 let lastGuard = '';
 
@@ -35,7 +29,7 @@ for (const log of input) {
 	const guard = guards.find(g => g.id === log.guard);
 	const latestSleep = guard.sleepTimespans ? guard.sleepTimespans[guard.sleepTimespans.length - 1] : [];
 	// Waking up is always after the latest sleep began, so latest entry is used
-	const logTime = unixLogTime(log);
+	const logTime = log.timestamp;
 
 	if (log.action === 'w') {
 		latestSleep.end = logTime;
