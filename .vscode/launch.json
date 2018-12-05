@@ -32,6 +32,14 @@
 			"program": "${workspaceRoot}/day2/part2.js",
 			"cwd": "${workspaceRoot}/day2",
 			"protocol": "inspector"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch day3/part1_2",
+			"program": "${workspaceRoot}/day3/part1_2.js",
+			"cwd": "${workspaceRoot}/day3",
+			"protocol": "inspector"
 		}
 	]
 }
