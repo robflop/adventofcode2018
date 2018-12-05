@@ -22,7 +22,7 @@ const guards = [];
 
 for (const log of input) {
 	if (guards.find(guard => guard.id === log.guard)) continue;
-	else guards.push({ id: log.guard, sleepTimespans: [] });
+	else guards.push({ id: log.guard, sleepTimespans: [], totalSleep: 0 });
 }
 
 for (const log of input) {
@@ -34,6 +34,8 @@ for (const log of input) {
 	if (log.action === 'w') {
 		latestSleep.end = logTime;
 		latestSleep.duration = latestSleep.end - latestSleep.start;
+
+		guard.totalSleep += latestSleep.duration;
 	}
 	else if (log.action === 'f') {
 		/* eslint-disable no-lonely-if */
@@ -41,12 +43,6 @@ for (const log of input) {
 		else guard.sleepTimespans = [{ start: logTime }];
 		/* eslint-enable no-lonely-if */
 	}
-}
-
-for (const guard of guards) {
-	guard.totalSleep = guard.sleepTimespans.reduce((acc, sleep) => {
-		return acc = acc + sleep.duration;
-	}, 0);
 }
 
 const guardMinutes = [];
