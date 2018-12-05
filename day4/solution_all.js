@@ -22,12 +22,13 @@ const guards = [];
 
 for (const log of input) {
 	if (guards.find(guard => guard.id === log.guard)) continue;
-	else guards.push({ id: log.guard, sleepTimespans: [], totalSleep: 0 });
+
+	guards.push({ id: log.guard, sleepTimespans: [], totalSleep: 0 });
 }
 
 for (const log of input) {
 	const guard = guards.find(g => g.id === log.guard);
-	const latestSleep = guard.sleepTimespans ? guard.sleepTimespans[guard.sleepTimespans.length - 1] : [];
+	const latestSleep = guard.sleepTimespans[guard.sleepTimespans.length - 1];
 	// Waking up is always after the latest sleep began, so latest entry is used
 	const logTime = log.timestamp;
 
@@ -38,10 +39,8 @@ for (const log of input) {
 		guard.totalSleep += latestSleep.duration;
 	}
 	else if (log.action === 'f') {
-		/* eslint-disable no-lonely-if */
 		if (guard.sleepTimespans) guard.sleepTimespans.push({ start: logTime });
 		else guard.sleepTimespans = [{ start: logTime }];
-		/* eslint-enable no-lonely-if */
 	}
 }
 
@@ -73,26 +72,27 @@ const mostFrequentSleepMinute = guardMinutes.sort((a, b) => {
 	return b - a;
 })[0];
 
+// Great variable names, i know
 const mostFrequentSleeper = guards.sort((a, b) => b.totalSleep - a.totalSleep)[0];
 const mostFrequentSleeperSleepMinute = guardMinutes
 	.filter(minute => Object.keys(minute[1]).includes(mostFrequentSleeper.id))
 	.sort((a, b) => b[1][mostFrequentSleeper.id] - a[1][mostFrequentSleeper.id])[0];
 
-const highestSleepFrequency = { number: 0 };
+const highestSleepFrequency = { frequency: 0 };
 
 for (const minute of guardMinutes) {
 	const minuteRepeat = Object.entries(minute[1]).sort((a, b) => b[1] - a[1])[0];
 
 	if (Object.entries(minute[1]) < 1) continue;
 
-	if (minuteRepeat[1] > highestSleepFrequency.number) {
-		highestSleepFrequency.number = minuteRepeat[1];
+	if (minuteRepeat[1] > highestSleepFrequency.frequency) {
+		highestSleepFrequency.frequency = minuteRepeat[1];
 		highestSleepFrequency.minute = minute;
 		highestSleepFrequency.guard = minuteRepeat[0];
 	}
 }
 
-console.log('Most frequent sleeper:', `${highestSleepFrequency.guard} was asleep at 00:${highestSleepFrequency.minute[0]} a total of ${highestSleepFrequency.number} times.`); // eslint-disable-line max-len
+console.log('Most frequent sleeper:', `${highestSleepFrequency.guard} was asleep at 00:${highestSleepFrequency.minute[0]} a total of ${highestSleepFrequency.frequency} times.`); // eslint-disable-line max-len
 console.log('Longest sleeper overall:', `${mostFrequentSleeper.id} slept a total of ${mostFrequentSleeper.totalSleep / 60000} minutes.`);
 console.log('Most frequent minute slept during:', `${Object.keys(mostFrequentSleepMinute[1]).length} guards slept during Minute ${mostFrequentSleepMinute[0]}.`); // eslint-disable-line max-len
 console.log('Part 1 result:', mostFrequentSleeper.id.substr(1) * mostFrequentSleeperSleepMinute[0]);
