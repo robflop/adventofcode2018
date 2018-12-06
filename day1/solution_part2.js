@@ -5,7 +5,7 @@ let duplicateFound = false;
 
 let loopNum = 1;
 
-while (true && !duplicateFound) {
+while (!duplicateFound) {
 	for (const i of input) {
 		total = total + i;
 
