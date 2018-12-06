@@ -52,16 +52,8 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch day5/solution_part1",
-			"program": "${workspaceRoot}/day5/solution_part1.js",
-			"cwd": "${workspaceRoot}/day5",
-			"protocol": "inspector"
-		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Launch day5/solution_part2",
-			"program": "${workspaceRoot}/day5/solution_part2.js",
+			"name": "Launch day5/solution_all",
+			"program": "${workspaceRoot}/day5/solution_all.js",
 			"cwd": "${workspaceRoot}/day5",
 			"protocol": "inspector"
 		},
