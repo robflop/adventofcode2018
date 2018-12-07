@@ -66,5 +66,3 @@ while (!instructions.every(i => i.fulfilled)) {
 	fulfillInstruction(instructions[0].name);
 }
 console.log('\nThe instruction order is as follows:', instructionOrder.join(''));
-
-console.timeEnd('a');
