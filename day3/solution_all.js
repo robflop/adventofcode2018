@@ -1,6 +1,7 @@
 // Beware, incredibly inefficient, takes a lot of time to run
 
 const input = require('fs').readFileSync('./input.txt', 'utf8').split('\r\n').map(claim => {
+	if (!claim) return ''; // Empty lines
 	const claimRegex = new RegExp(/(#\d+)\s@\s(\d+),(\d+):\s(\d+)x(\d+)/);
 	const claimProperties = claimRegex.exec(claim);
 
@@ -11,7 +12,7 @@ const input = require('fs').readFileSync('./input.txt', 'utf8').split('\r\n').ma
 		w: parseInt(claimProperties[4]),
 		h: parseInt(claimProperties[5])
 	};
-});
+}).filter(l => l);
 
 const coordinates = [];
 

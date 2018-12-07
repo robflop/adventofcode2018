@@ -1,4 +1,5 @@
 const input = require('fs').readFileSync('./input.txt', 'utf8').split('\r\n').map(log => {
+	if (!log) return ''; // Empty lines
 	const logRegex = new RegExp(/\[(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2})\]\s(falls asleep|Guard (#\d{1,4}) begins shift|wakes up)/);
 	const logInfo = logRegex.exec(log);
 
@@ -7,7 +8,7 @@ const input = require('fs').readFileSync('./input.txt', 'utf8').split('\r\n').ma
 		action: logInfo[2][0].toLocaleLowerCase(), // lowercase first letter only to identify
 		guard: logInfo[3]
 	};
-}).sort((a, b) => a.timestamp - b.timestamp);
+}).sort((a, b) => a.timestamp - b.timestamp).filter(l => l);
 
 let lastGuard = '';
 
