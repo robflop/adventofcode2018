@@ -81,5 +81,13 @@
 			"cwd": "${workspaceRoot}/day7",
 			"protocol": "inspector"
 		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch day7/solution_part2",
+			"program": "${workspaceRoot}/day7/solution_part2.js",
+			"cwd": "${workspaceRoot}/day7",
+			"protocol": "inspector"
+		},
 	]
 }
